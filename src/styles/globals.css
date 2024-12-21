@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.poem {
+    @apply bg-gray-100 p-4 rounded-lg border-l-4 border-green-500 italic text-lg;
+  }

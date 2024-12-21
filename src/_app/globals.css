@@ -19,3 +19,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.poem {
+  @apply bg-gray-100 p-4 rounded-lg border-l-4 border-red-500 italic text-lg;
+}
