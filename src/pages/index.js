@@ -10,7 +10,7 @@ export default function Home() {
           <li><Link className="text-blue-500 hover:underline" href="/curriculum" >Currículum</Link></li>
           <li><Link className="text-blue-500 hover:underline" href="/demo-reel">Demo Reel</Link></li>
           <li><Link className="text-blue-500 hover:underline" href="/musica">Música</Link></li>
-          <li><Link className="text-blue-500 font-mono hover:underline" href="/blog">Blog</Link></li>
+          <li><Link className="text-blue-500 hover:shadow-lg hover:text-red-400 font-mono" href="/blog">Blog</Link></li>
         </ul>
       </nav>
     </div>

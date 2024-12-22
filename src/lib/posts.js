@@ -14,12 +14,24 @@ export function getSortedPostsData() {
     // Usar gray-matter para parsear el contenido del post
     const matterResult = matter(fileContents);
 
+    // Procesar el contenido para identificar poemas
+    const processedContent = processPoems(matterResult.content);
+
     return {
       id: fileName.replace(/\.md$/, ''),
       ...matterResult.data,
+      content: processedContent, // Agregar el contenido procesado
     };
   });
 
-  // Ordenar por fecha
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return allPostsData.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+}
+
+// Función para procesar poemas
+function processPoems(content) {
+  return content
+    .replace(/\*\*\[poema\]\*\*/g, '<div class="poema">') // Reemplazar inicio del poema
+    .replace(/\*\*\[\/poema\]\*\*/g, '</div>'); // Reemplazar fin del poema
 }

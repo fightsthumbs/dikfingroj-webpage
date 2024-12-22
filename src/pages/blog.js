@@ -17,10 +17,9 @@ export default function Blog({ allPostsData }) {
       <ul>
         {allPostsData.map(({ id, date, title }) => (
           <li key={id} className="mb-4">
-          <Link href={`/blog/${id}`} className="text-xl font-medium text-blue-600 hover:underline">
+          <Link href={`/blog/${id}`} className="text-xl font-medium text-red-600 hover:underline">
             {title}
           </Link>
-
             <p className="text-sm text-gray-500">{date}</p>
           </li>
         ))}
