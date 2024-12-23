@@ -1,21 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.poema,
+
+
+
+
 .poem {
   background-color: #f3f4f6; /* Fondo claro */
   font-style: italic;        /* Texto en cursiva */
-  border-left: 4px solid #3b82f6; /* Línea azul a la izquierda */
-  padding-left: 1rem;        /* Espaciado interno */
-  margin: 1rem 0;            /* Separación superior e inferior */
+border-left: 4px solid #3b82f6; /* Línea azul a la izquierda */
+  
  /* @apply bg-slate-200 */
- white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
+ 
  font-style: italic; /* Opcional: para darle un estilo poético */
- margin: 1rem 0; /* Espaciado opcional */
+
 }
 
+.poema,
 .poem {
-  border-left: 4px solid red;
+  
+  padding-left: 1rem;        /* Espaciado interno */
+  white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
+  margin: 1rem 0; /* Espaciado opcional */
+}
+
+.poema {
+  @apply bg-sand text-black font-serif p-4 rounded-lg;
+  
 }
 
 .p {
