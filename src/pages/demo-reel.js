@@ -2,34 +2,68 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "tailwindcss/tailwind.css";
+import { getAllProjects } from '../lib/posts';
+// import "tailwindcss/tailwind.css";
 
 Modal.setAppElement("#__next");
 
-const DemoReel = () => {
+export async function getStaticProps() {
+  const projects = getAllProjects();
+  return {
+    props: { projects },
+  };
+}
+
+
+export default function DemoReel({ projects }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Proyecto 1",
-      description: "Descripción detallada del Proyecto 1.",
-      thumbnail: "images/thumbnails/project-1.jpg",
-    },
-    {
-      id: 2,
-      title: "Proyecto 2",
-      description: "Descripción detallada del Proyecto 2.",
-      thumbnail: "/path-to-thumbnail2.jpg",
-    },
-    {
-      id: 3,
-      title: "Proyecto 3",
-      description: "Descripción detallada del Proyecto 3.",
-      thumbnail: "/path-to-thumbnail3.jpg",
-    },
-  ];
+  // const projects = [
+  //   {
+  //     id: 1,
+  //     title: "Proyecto 1",
+  //     description: "Descripción detallada del Proyecto 1.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Proyecto 2",
+  //     description: "Descripción detallada del Proyecto 2.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Proyecto 3",
+  //     description: "Descripción detallada del Proyecto 3.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Proyecto 4",
+  //     description: "Descripción detallada del Proyecto 3.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Proyecto 5",
+  //     description: "Descripción detallada del Proyecto 3.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Proyecto 6",
+  //     description: "Descripción detallada del Proyecto 3.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },    {
+  //     id: 7,
+  //     title: "Proyecto 7",
+  //     description: "Descripción detallada del Proyecto 3.",
+  //     thumbnail: "images/thumbnails/project-1.jpg",
+  //   },
+  // ];
+
+
 
   const openModal = (project) => {
     setCurrentProject(project);
@@ -70,17 +104,19 @@ const DemoReel = () => {
           </h3>
           <Swiper
             spaceBetween={10}
-            slidesPerView={3}
-            className="flex justify-center"
+            slidesPerView={4}
+            className="thumbnails-carousel"/* flex justify-center */
           >
             {projects.map((project) => (
-              <SwiperSlide key={project.id} className="cursor-pointer">
+              <SwiperSlide key={project.id} className="cursor-pointer relative group">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
-                  onClick={() => openModal(project)}
-                  className="rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                  className="thumbnail-image group-hover:blur-sm transition duration-300 rounded-lg"
                 />
+                <div onClick={() => openModal(project)} className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50">
+                  <p className="text-white text-lg font-bold">{project.title}</p>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -90,9 +126,14 @@ const DemoReel = () => {
           isOpen={isOpen}
           onRequestClose={closeModal}
           contentLabel="Detalles del Proyecto"
-          className="bg-white text-black p-6 rounded-lg max-w-md mx-auto mt-20 transition-all transform scale-100"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center transition-opacity"
+          className={`bg-white text-black p-6 rounded-lg max-w-md mx-auto ${
+            isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'
+          } transition-all duration-300 ease-in-out`}
+          overlayClassName={`fixed inset-0 bg-black  flex items-center justify-center ${
+            isOpen ? 'bg-opacity-75' : 'bg-opacity-0'
+          } transition-opacity duration-300 ease-in-out`}
           shouldCloseOnOverlayClick={true}
+          closeTimeoutMS={300}
         >
           {currentProject && (
             <div>
@@ -114,4 +155,4 @@ const DemoReel = () => {
   );
 };
 
-export default DemoReel;
+// export default DemoReel;

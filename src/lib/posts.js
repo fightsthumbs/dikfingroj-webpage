@@ -3,6 +3,23 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
+const projectsDirectory = path.join(process.cwd(), 'src/content/projects');
+
+export function getAllProjects() {
+  const fileNames = fs.readdirSync(projectsDirectory);
+  return fileNames.map((fileName) => {
+    const fullPath = path.join(projectsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // Parsear contenido Markdown y metadatos (frontmatter)
+    const { data, content } = matter(fileContents);
+    return {
+      id: data.id || fileName.replace(/\.md$/, ''),
+      ...data,
+      content, // Contenido del proyecto
+    };
+  });
+}
 
 export function getSortedPostsData() {
   // Leer los archivos en la carpeta posts
