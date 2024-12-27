@@ -223,6 +223,12 @@ const CV = () => {
   const MainContent = () => (
     <div className="p-8">
       <div className="mb-8">
+      <button
+          onClick={toggleLanguage}
+          className="px-4 py-2 bg-[#3182CE] text-white rounded hover:bg-blue-700 mb-2 m-2 float-end"
+        >
+          {language === 'en' ? 'Español' : 'English'}
+      </button>
         <h1 className="text-4xl font-bold text-[#2D3748] mb-2">Benjamin Alvarez Rodriguez</h1>
         <p className="text-xl text-[#4A5568]">{language === 'en' ? 'Video Editor | Motion Designer | Music Composer' : 'Editor Audiovisual | Motion Designer | Compositor Musical'}</p>
       </div>
@@ -313,12 +319,7 @@ const CV = () => {
 
   return (
     <div className=" mx-auto p-8 bg-gray-100 main-content"> {/* max-w-6xl */}
-      <button
-          onClick={toggleLanguage}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-2 m-2 float-end"
-        >
-          {language === 'en' ? 'Español' : 'English'}
-      </button>
+      
       <div className="grid grid-cols-[300px_1fr] bg-white rounded-lg shadow-md overflow-hidden gap-8">
         <Sidebar />
         <MainContent />
