@@ -1,10 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import { Printer } from 'lucide-react';
 
 
 const CV = () => {
 
   const [language, setLanguage] = useState('en');
+  const contentRef = React.useRef(null);
+
+  const handlePrint = useReactToPrint({   contentRef: contentRef,  // En lugar de content: () => componentRef.current
+    documentTitle: 'Benjamin_Alvarez_CV' } 
+//     {
+//     content: () => contentRef.current,
+// /*     documentTitle: 'Benjamin_Alvarez_CV', */
+//     onBeforePrint: () => {
+//       console.log("Preparando para imprimir...");
+//     },
+//     onAfterPrint: () => {
+//       console.log("Documento impreso!");
+//     },
+//     onError: (error) => {
+//       console.error("Error al imprimir:", error);
+//     },
+//   }
+);
+
+
 
   const skills = {
     editingPostProduction: [
@@ -158,13 +180,13 @@ const CV = () => {
 
   const SkillDots = ({ level }) => {
     return (
-      <div className="flex gap-1">
+      <div className="flex gap-1" aria-label={`Skill level: ${level} out of 5`}>
         {[...Array(5)].map((_, index) => (
           <div
             key={index}
             className={`w-2 h-2 rounded-full ${
               index < level
-                ? 'bg-[#857662]'
+                ? 'bg-[#857662] print:border print:border-[#857662]'
                 : 'border border-[#857662] bg-transparent'
             }`}
           />
@@ -174,18 +196,18 @@ const CV = () => {
   };
 
   const Sidebar = () => (
-    <div className="bg-[#2D3748] text-white p-8 ">
+    <div className="bg-[#2D3748] text-white p-8 print:bg-white print:text-black">
       <div className="mb-8 sidebar">
-        <h2 className="text-2xl font-bold border-b-2 border-white pb-2 mt-6 mb-4">{language === 'en' ? 'Contact' : 'Contacto'}</h2>
+        <h2 className="text-2xl font-bold border-b-2 border-white pb-2 mt-6 mb-4 print:border-black print:text-black">{language === 'en' ? 'Contact' : 'Contacto'}</h2>
         <p className="my-2">📧 balvrod@gmail.com</p>
         <p className="my-2">📱 (506) 8492-6888</p>
         <p className="my-2">📍 Escazú, San José, Costa Rica</p>
       </div>
 
-      <div sidebar>
-        <h2 className="text-2xl font-bold border-b-2 border-white pb-2 mt-6 mb-4 ">{language === 'en' ? 'Technical Skills' : 'Habilidades Técnicas'}</h2>
+      <div className='sidebar'>
+        <h2 className="text-2xl font-bold border-b-2 border-white pb-2 mt-6 mb-4 print:border-black print:text-black">{language === 'en' ? 'Technical Skills' : 'Habilidades Técnicas'}</h2>
         
-        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2">{language === 'en' ? 'Editing & Post-Production' : 'Edición y Postproducción'}</h3>
+        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2 print:text-gray-800">{language === 'en' ? 'Editing & Post-Production' : 'Edición y Postproducción'}</h3>
         {skills.editingPostProduction.map((skill) => (
           <div key={skill.name} className="flex justify-between items-center mb-2">
             <span>{skill.name}</span>
@@ -193,7 +215,7 @@ const CV = () => {
           </div>
         ))}
 
-        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2">{language === 'en' ? 'Audio & Music' : 'Audio y Música'}</h3>
+        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2 print:text-gray-800">{language === 'en' ? 'Audio & Music' : 'Audio y Música'}</h3>
         {skills.audioMusic.map((skill) => (
           <div key={skill.name} className="flex justify-between items-center mb-2">
             <span>{skill.name}</span>
@@ -201,7 +223,7 @@ const CV = () => {
           </div>
         ))}
 
-        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2">{language === 'en' ? 'Development' : 'Desarrollo'}</h3>
+        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2 print:text-gray-800">{language === 'en' ? 'Development' : 'Desarrollo'}</h3>
         {skills.development.map((skill) => (
           <div key={skill.name} className="flex justify-between items-center mb-2">
             <span>{skill.name}</span>
@@ -209,7 +231,7 @@ const CV = () => {
           </div>
         ))}
 
-        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2">{language === 'en' ? 'Languages' : 'Idiomas'}</h3>
+        <h3 className="text-lg font-bold text-gray-200 mt-6 mb-2 print:text-gray-800">{language === 'en' ? 'Languages' : 'Idiomas'}</h3>
         {skills.languages.map((language) => (
           <div key={language.name} className="flex justify-between mb-2">
             <span>{language.name}</span>
@@ -225,7 +247,7 @@ const CV = () => {
       <div className="mb-8">
       <button
           onClick={toggleLanguage}
-          className="px-4 py-2 bg-[#3182CE] text-white rounded hover:bg-blue-700 mb-2 m-2 float-end"
+          className="px-4 py-2 bg-[#3182CE] text-white rounded hover:bg-[#20578a] mb-2 m-2 float-end transition-colors  print:hidden"
         >
           {language === 'en' ? 'Español' : 'English'}
       </button>
@@ -299,7 +321,7 @@ const CV = () => {
         </div> */}
       </section>
 
-      <section>
+      <section className='print:hidden'>
         <h2 className="text-2xl font-bold text-[#3182CE] border-b-2 border-[#3182CE] pb-2 mt-6 mb-4">{language === 'en' ? 'Links' : 'Enlaces'}</h2>
         <a 
           href="https://github.com/fightsthumbs" 
@@ -318,11 +340,24 @@ const CV = () => {
   };
 
   return (
-    <div className=" mx-auto p-8 bg-gray-100 main-content"> {/* max-w-6xl */}
-      
-      <div className="grid grid-cols-[300px_1fr] bg-white rounded-lg shadow-md overflow-hidden gap-8">
+    <div className=" mx-auto p-8 bg-gray-100 main-content print:bg-white print:p-0"> {/* max-w-6xl */}
+      <button
+        onClick={() => handlePrint()}
+        className="mb-4 px-4 py-2 bg-[#3182CE] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2 print:hidden"
+      >
+        <Printer size={20} />
+        Download PDF
+      </button>
+      <div ref={contentRef}>
+       <div 
+        
+        className="grid grid-cols-[300px_1fr] bg-white rounded-lg shadow-md overflow-hidden gap-8 print:shadow-none "
+      >
         <Sidebar />
         <MainContent />
+
+      </div>
+
       </div>
     </div>
   );
