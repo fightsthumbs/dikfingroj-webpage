@@ -341,13 +341,7 @@ const CV = () => {
 
   return (
     <div className=" mx-auto p-8 bg-gray-100 main-content print:bg-white print:p-0"> {/* max-w-6xl */}
-      <button
-        onClick={() => handlePrint()}
-        className="mb-4 px-4 py-2 bg-[#3182CE] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2 print:hidden"
-      >
-        <Printer size={20} />
-        Download PDF
-      </button>
+
       <div ref={contentRef}>
        <div 
         
@@ -357,7 +351,13 @@ const CV = () => {
         <MainContent />
 
       </div>
-
+      <button
+        onClick={() => handlePrint()}
+        className="mb-4 mt-4 px-4 py-2 bg-[#3182CE] text-white rounded-lg hover:bg-[#2c5282] transition-colors flex items-center gap-2 float-right print:hidden"
+      >
+        <Printer size={20} />
+        Download PDF
+      </button>
       </div>
     </div>
   );
