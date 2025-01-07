@@ -1,4 +1,4 @@
-import CV from "/src/pages/cv-react-Component.js"
+import CV from "/src/pages/cv-react-component.js"
 
 export default function Curriculum() {
   return (
