@@ -2,28 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-.poem {
-  background-color: #f3f4f6; /* Fondo claro */
-  font-style: italic;        /* Texto en cursiva */
-border-left: 4px solid #3b82f6; /* Línea azul a la izquierda */
-  
- /* @apply bg-slate-200 */
- 
- font-style: italic; /* Opcional: para darle un estilo poético */
-
+*::selection {
+  background-color: rgba(255, 230, 0, 0.959);
+  color:rgb(45, 55, 72);
 }
 
+poem,
 .poema,
 .poem {
-  
-  padding-left: 1rem;        /* Espaciado interno */
+  @apply bg-[#EAE0D7] text-[#2C4072] font-serif p-4 rounded-lg;
+  padding-left: 4rem;        /* Espaciado interno */
   white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
   margin: 1rem 0; /* Espaciado opcional */
+  font-style: italic;        /* Texto en cursiva Opcional: para darle un estilo poético */
+  border-left: 4px solid #2C4072;
+  max-width: 700px;
+  text-align: center;
 }
 
-.poema {
-  @apply bg-sand text-black font-serif p-4 rounded-lg;
-  
+div.poem > h2 {
+  font-size: xx-large;
+  text-decoration: wavy;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+.article-title {
+  font-size: 42px;
+  line-height: 1.25;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.autor-name-hide {
+  display: none;
+}
+
+.pseudo-name:hover ~ .autor-name-hide {
+  display: inline;
+  color:blue;
+}
+
+.pseudo-name:hover {
+  cursor: pointer;
 }
 
 .p {
@@ -34,7 +55,3 @@ h3 {
   @apply text-fuchsia-700 text-3xl
 }
 
-*::selection {
-  background-color: rgba(255, 230, 0, 0.959);
-  color:rgb(45, 55, 72);
-}

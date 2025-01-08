@@ -32,7 +32,7 @@ export function getSortedPostsData() {
     const matterResult = matter(fileContents);
 
     // Procesar el contenido para identificar poemas
-    const processedContent = processPoems(matterResult.content);
+    const processedContent = matterResult.content;
 
     return {
       id: fileName.replace(/\.md$/, ''),
@@ -46,9 +46,11 @@ export function getSortedPostsData() {
   });
 }
 
-// Función para procesar poemas
-function processPoems(content) {
-  return content
-    .replace(/\*\*\[poema\]\*\*/g, '<div class="poema">') // Reemplazar inicio del poema
-    .replace(/\*\*\[\/poema\]\*\*/g, '</div>'); // Reemplazar fin del poema
-}
+// Función para procesar poemas //Esta función no función, sino la que está dentro de [id].js
+// function processPoems(content) {
+//   return content
+//     .replace(/\*\*\*\[poem\]/g, '<div class="poema">') // Reemplazar inicio del poema
+//     .replace(/\[\/poem\]/g, '</div>') // Reemplazar fin del poema
+//     .replace(/\<poem\>/g, '<div class="poema">') // Reemplazar inicio del poema
+//     .replace(/\<\/poem\>/g, '</div>'); // Reemplazar fin del poema
+// }

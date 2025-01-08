@@ -30,10 +30,10 @@ export async function getStaticProps({ params }) {
   // Usar gray-matter para obtener datos y contenido del post
   const matterResult = matter(fileContents);
 
-  // Reemplazar etiquetas [poema] y [/poema] en el contenido
+  // Reemplazar etiquetas [poem] y/o <poem> en el contenido
   const transformedContent = matterResult.content
-    .replace(/\*\*\[poema\]\*\*/g, '<div class="poema">')
-    .replace(/\*\*\[\/poema\]\*\*/g, '</div>');
+    .replace(/[\[\<]poema*[\]\>]/g, '<div class="poem">')
+    .replace(/[\[\<]\/poema*[\]\>]/g, '</div>');
 
   // Procesar el contenido transformado con remark y rehype
   const processedContent = await unified()
@@ -59,7 +59,8 @@ export default function Post({ postData }) {
   return (
     <div className="container mx-auto p-4">
       <article className="prose lg:prose-xl mx-auto">
-        <h1 className="text-4xl font-bold">{postData.title}</h1>
+        <h1 className="text-4xl font-bold article-title">{postData.title}</h1>
+        <p><span className='pseudo-name'>by @fighsthumbs</span><span className='autor-name-hide'> — Benjamín Álvarez Rodríguez</span></p>
         <p className="text-gray-500">{postData.date}</p>
         <div
           dangerouslySetInnerHTML={{
