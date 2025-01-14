@@ -2,8 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 const projectsDirectory = path.join(process.cwd(), 'src/content/projects');
+const musicDirectory = path.join(process.cwd(), 'src/content/music');
 
 export function getAllProjects() {
   const fileNames = fs.readdirSync(projectsDirectory);
@@ -43,6 +44,22 @@ export function getSortedPostsData() {
 
   return allPostsData.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
+  });
+}
+
+export function getAllMusic() {
+  const fileNames = fs.readdirSync(musicDirectory);
+
+  return fileNames.map((fileName) => {
+    const fullPath = path.join(musicDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    
+    // Parsear el contenido Markdown
+    const { data } = matter(fileContents);
+    return {
+      id: fileName.replace(/\.md$/, ''), // Nombre del archivo como ID
+      ...data,
+    };
   });
 }
 

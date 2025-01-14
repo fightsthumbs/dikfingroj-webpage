@@ -1,4 +1,4 @@
-import { getAllMusic } from '../lib/music';
+import { getAllMusic } from '../lib/posts';
 
 
 // export default function Musica() {
