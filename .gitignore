@@ -42,8 +42,8 @@ next-env.d.ts
 
 
 # ignorar post
-/posts/*.md
-!/posts/_posts.md
+src/content/posts/*.md
+!src/content/posts/_posts.md
 
 # misc folder
 /src/misc
