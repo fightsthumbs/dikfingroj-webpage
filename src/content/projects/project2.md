@@ -1,7 +1,7 @@
 ---
 id: proyecto2
-title: Proyecto 2
-description: Este es el primer proyecto.
-thumbnail: images/thumbnails/project-1.jpg
+title: Esperanto Senlime
+description: Serie de 16 episodio que muestra un concurso de viajes alrededor de Europa.
+thumbnail: images/thumbnails/esperantosenlime.jpg
 ---
 Este es un proyecto increíble donde trabajé en...

@@ -83,7 +83,7 @@ export default function DemoReel({ projects }) {
 
       <main className="w-full max-w-4xl flex flex-col items-center mt-4">
         <div
-          className="w-full bg-gradient-to-r from-gray-800 to-black p-4 rounded-lg shadow-inner"
+          className="w-full bg-black rounded-lg shadow-inner"
           style={{ height: "60vh", margin: "0 5%" }}
         >
           <iframe
@@ -112,7 +112,7 @@ export default function DemoReel({ projects }) {
                 <img
                   src={project.thumbnail}
                   alt={project.title}
-                  className="thumbnail-image group-hover:blur-sm transition duration-300 rounded-lg"
+                  className="thumbnail-image object-cover group-hover:blur-sm transition duration-300 rounded-lg"
                 />
                 <div onClick={() => openModal(project)} className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50">
                   <p className="text-white text-lg font-bold">{project.title}</p>

@@ -1,7 +1,7 @@
 ---
-id: proyecto2
-title: Proyecto 1
-description: Este es el primer proyecto.
-thumbnail: images/thumbnails/project-1.jpg
+id: neochess
+title: NEO-CHESS
+description: Spot publicitario para una aplicación para el estudio del ajedrez.
+thumbnail: images/thumbnails/neochess.jpg
 ---
 Este es un proyecto increíble donde trabajé en...

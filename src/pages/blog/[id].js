@@ -4,6 +4,8 @@ import matter from 'gray-matter';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
@@ -37,10 +39,13 @@ export async function getStaticProps({ params }) {
 
   // Procesar el contenido transformado con remark y rehype
   const processedContent = await unified()
-    .use(remarkParse) // Parsear Markdown
-    .use(remarkRehype, { allowDangerousHtml: true }) // Convertir a HTML sin eliminar etiquetas personalizadas
-    .use(rehypeStringify, { allowDangerousHtml: true }) // Convertir a HTML string
-    .process(transformedContent);
+  .use(remarkParse) // Parsear Markdown
+  .use(remarkGfm) // Habilitar soporte para tablas y otras extensiones GFM
+  .use(remarkRehype, { allowDangerousHtml: true }) // Convertir a HTML
+  .use(rehypeHighlight) // Resaltado de código y texto
+  .use(rehypeStringify, { allowDangerousHtml: true }) // Convertir a string HTML
+  .process(transformedContent);
+
 
   const contentHtml = processedContent.toString();
 
